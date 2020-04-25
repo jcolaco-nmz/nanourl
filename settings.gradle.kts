@@ -1,1 +1,1 @@
-rootProject.name = "nano-url"
+rootProject.name = "nanourl"
