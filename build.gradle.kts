@@ -42,6 +42,12 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+tasks.register("downloadDependenciesForDocker", Copy::class) {
+	mkdir("tmp")
+	from(sourceSets.main.get().runtimeClasspath, sourceSets.test.get().runtimeClasspath)
+	into("tmp")
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")

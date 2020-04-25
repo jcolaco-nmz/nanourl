@@ -11,6 +11,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import java.math.BigInteger
+import java.util.Optional
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
@@ -19,7 +20,6 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.data.repository.findByIdOrNull
 
 @ExtendWith(MockitoExtension::class)
 class ShortUrlServiceTest {
@@ -78,14 +78,14 @@ class ShortUrlServiceTest {
     @Test
     fun `findShortUrl - should return null if not found`() {
         val short = ShortUrl(BigInteger.ONE, "http://www.google.com/abc")
-        whenever(shortUrlRepository.findByIdOrNull(short.id!!)).thenReturn(null)
+        whenever(shortUrlRepository.findById(short.id!!)).thenReturn(Optional.empty())
         assertNull(subject.findShortUrl(short.id!!))
     }
 
     @Test
     fun `findShortUrl - should return if found`() {
         val short = ShortUrl(BigInteger.ONE, "http://www.google.com/abc")
-        whenever(shortUrlRepository.findByIdOrNull(short.id!!)).thenReturn(short)
+        whenever(shortUrlRepository.findById(short.id!!)).thenReturn(Optional.of(short))
         assertEquals(short, subject.findShortUrl(short.id!!))
     }
 }
