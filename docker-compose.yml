@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  tests:
+    build:
+      context: .
+      target: BUILD_IMAGE
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/dev
+    depends_on:
+      - postgres
+    command: /app/gradlew test
+
+  nanourl:
+    build:
+      context: .
+      target: BUILD_IMAGE
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    command: /app/gradlew bootRun
+
+  postgres:
+    image: "postgres:10"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=dev_db_user
+      - POSTGRES_PASSWORD=dev_database_password
+      - POSTGRES_DB=dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
