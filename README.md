@@ -2,24 +2,24 @@
 
 ## How to run
 
-###Build
+### Build
 ```bash
 $ docker-compose build 
 ```
 
-###Service
+### Service
 ```bash
 $ docker-compose up nanourl 
 ```
 
-###Tests
+### Tests
 ```bash
 $ docker-compose run tests 
 ```
 
 ## How to use
 
-###Create short URL
+### Create short URL
 ```bash
 $ curl --location --request POST 'http://localhost:8080/' \
   --header 'Content-Type: application/json' \
@@ -36,7 +36,7 @@ This will respond with
 }
 ```
 
-###Use Short URL
+### Use Short URL
 
 Doing a `GET http://localhost:8080/<id>` will cause a redirect to original URL
 
