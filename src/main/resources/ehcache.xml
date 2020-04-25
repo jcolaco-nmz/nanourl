@@ -1,0 +1,21 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.ehcache.org/v3"
+        xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+        xsi:schemaLocation="
+            http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+            http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <cache alias="squareCache">
+        <key-type>java.math.BigInteger</key-type>
+        <value-type>com.jcolaco.nanourl.model.ShortUrl</value-type>
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+
+        <resources>
+            <heap unit="entries">10000</heap>
+            <offheap unit="MB">100</offheap>
+        </resources>
+    </cache>
+
+</config>
