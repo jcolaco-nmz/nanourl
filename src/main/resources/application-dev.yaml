@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dev
+    initialization-mode: always
+    username: dev_db_user
+    password: dev_database_password
