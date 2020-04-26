@@ -57,9 +57,9 @@ Doing a `GET http://localhost:8080/<id>` will cause a redirect to original URL
 ## Design Decisions
 * URL id is calculated with a bijective function using the alphabet as base to convert the primary key number
 * BigInteger is used to have even higher usable sequence
-* The database is postgresql. The sequence is starting at 1, but I would assume in a real life system the sequence would start at a higher number do the URL id has a minimum set of chars
+* The database is postgresql. The sequence is starting at 1, but I would assume in a real life system the sequence would start at a higher number so the URL id has a minimum set of chars
 * Reactive could've been used, however r2dbc is still in milestone support
-    * To not have double RTT on get shortUrl from database and insert an access log, Kotlin coroutines were used
+    * To not have double RTT on get shortUrl from database and insert an access log, Kotlin coroutines were used to execute insert async
     * A stored proc could've been used, however memory cache would not be usable
 * Shortened URL is cached upon creation due to the assumption it will be used in the following minutes
     * Cache has configurable TTL and size
